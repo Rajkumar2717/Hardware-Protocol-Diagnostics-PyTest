@@ -1,0 +1,20 @@
+$ pytest -v test_diagnostics.py
+============================= test session starts ==============================
+platform linux -- Python 3.10.12, pytest-7.4.0
+rootdir: /home/rajkumar/projects/Hardware-Protocol-Diagnostics
+
+test_diagnostics.py::test_i2c_temp_sensor_read FAILED                    [ 50%]
+test_diagnostics.py::test_spi_flash_memory_integrity PASSED              [100%]
+
+=================================== FAILURES ===================================
+__________________________ test_i2c_temp_sensor_read ___________________________
+
+    def test_i2c_temp_sensor_read(i2c_bus):
+        actual_value = i2c_bus.read_byte_data(0x40, 0x01)
+>       assert actual_value == 0x5A, f"Hardware Failure: I2C Temp Sensor returned {hex(actual_value)}"
+E       AssertionError: Hardware Failure: I2C Temp Sensor returned 0xff
+
+test_diagnostics.py:44: AssertionError
+=========================== short test summary info ============================
+FAILED test_diagnostics.py::test_i2c_temp_sensor_read - AssertionError: Hardware Failure...
+========================= 1 failed, 1 passed in 0.05s ==========================
